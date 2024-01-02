@@ -1,0 +1,64 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <link th:href="@{/css/bootstrap.min.css}"
+          href="../css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<body>
+
+<div class="container" style="max-width: 600px">
+    <div class="py-5 text-center">
+        <h2>게임 목록</h2>
+    </div>
+
+    <form th:object="${gameSearch}" method="get" class="form-inline">
+    <div class="row">
+        <div class="col">
+            <input type="text" th:field="*{gameName}" class="form-control" placeholder="게임명"/>
+        </div>
+        <div class="col">
+            <input type="text" th:field="*{userCnt}" class="form-control" placeholder="플레이 인원"/>
+        </div>
+        <div class="col">
+            <button type="submit" class="btn btn-secondary mb-2">검색</button>
+        </div>
+        <div class="col">
+        </div>
+        <div class="col">
+            <div class="col">
+                    <button class="w-75 btn btn-secondary mb-2" style="width: 500px;"
+                            onclick="location.href='main.html'"
+                            th:onclick="|location.href='@{/}'|"
+                            type="button">이전</button>
+            </div>
+        </div>
+    </div>
+    </form>
+
+    <hr class="my-4">
+    <div>
+        <table class="table">
+            <thead>
+            <tr>
+                <th>게임명</th>
+                <th>최소 인원</th>
+                <th>최대 인원</th>
+                <th>게임 총 갯수</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="game : ${games}">
+                <td><a href="game.html" th:href="@{/games/{gameName}(gameName=${game.gameName})}" th:text="${game.gameName}">게임명</a></td>
+                <td th:text="${game.minCnt}">최소 인원</td>
+                <td th:text="${game.maxCnt}">최대 인원</td>
+                <td th:text="${game.gameCnt}">게임 총 갯수</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <hr class="my-4">
+</div> <!-- /container -->
+</body>
+</html>

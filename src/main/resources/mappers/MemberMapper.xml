@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.prepot.repository.mybatis.member.MemberMapper">
+
+    <insert id="save" >
+        insert into member (MEMBER_SEQ,USER_ID,PASS_WORD,USER_NAME,ADDR)
+        values (USER_SEQ.NEXTVAL,#{userId}, #{passWord}, #{userName},#{addr})
+    </insert>
+
+    <select id="findAll" resultType="Member">
+        select USER_ID,PASS_WORD,USER_NAME,ADDR
+        from member
+        <where>
+            <if test="userId != null and userId != ''">
+                and USER_ID like ('%'|| #{userId}||'%')
+            </if>
+            <if test="userName != null and userName != ''">
+                and USER_NAME like ('%'||#{userName}||'%')
+            </if>
+        </where>
+    </select>
+
+    <update id="update">
+        update member
+        set PASS_WORD=#{updateParam.passWord},
+            USER_NAME=#{updateParam.userName},
+            ADDR=#{updateParam.addr}
+        where USER_ID = #{userId}
+    </update>
+
+    <select id="findById" resultType="Member">
+        select  USER_ID,PASS_WORD,USER_NAME,ADDR
+        from member
+        where user_ID = #{userId}
+    </select>
+
+    <delete id="deleteMember">
+        delete from member where USER_ID = #{userId}
+    </delete>
+
+
+
+</mapper>

@@ -1,0 +1,68 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <link th:href="@{/css/bootstrap.min.css}"
+          href="../css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+
+<div class="container" style="max-width: 600px">
+    <div class="py-5 text-center">
+        <h2>회원 목록</h2>
+    </div>
+
+    <form th:object="${memberSearch}" method="get" class="form-inline">
+    <div class="row">
+        <div class="col">
+            <input type="text" th:field="*{userId}" class="form-control" placeholder="아이디"/>
+        </div>
+        <div class="col">
+            <input type="text" th:field="*{userName}" class="form-control" placeholder="이름"/>
+        </div>
+        <div class="col">
+            <button type="submit" class="btn btn-secondary mb-2">검색</button>
+        </div>
+        <div class="col">
+        </div>
+        <div class="col">
+            <div class="col">
+<!--                <button class="btn btn-primary float-end"-->
+<!--                        onclick="location.href='addMemberForm.html'"-->
+<!--                        th:onclick="|location.href='@{/members/add}'|"-->
+<!--                        type="button">회원 등록-->
+<!--                </button>-->
+                    <button class="w-75 btn btn-secondary mb-2" style="width: 500px;"
+                            onclick="location.href='main.html'"
+                            th:onclick="|location.href='@{/}'|"
+                            type="button">이전</button>
+            </div>
+        </div>
+    </div>
+    </form>
+
+    <hr class="my-4">
+    <div>
+        <table class="table">
+            <thead>
+            <tr>
+                <th>아이디</th>
+                <th>패스워드</th>
+                <th>이름</th>
+                <th>주소</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="member : ${members}">
+                <td><a href="member.html" th:href="@{/members/{userId}(userId=${member.userId})}" th:text="${member.userId}">아이디</a></td>
+                <td th:text="${member.passWord}">패스워드</td>
+                <td th:text="${member.userName}">이름</td>
+                <td th:text="${member.addr}">주소</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <hr class="my-4">
+</div> <!-- /container -->
+</body>
+</html>

@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.prepot.repository.mybatis.game.GameMapper">
+
+    <insert id="save" >
+        insert into GAME (GAME_SEQ,GAME_NAME,MIN_CNT,MAX_CNT,GAME_CNT)
+        values (PK_GAME_SEQ.NEXTVAL,#{gameName}, #{minCnt}, #{maxCnt},#{gameCnt})
+    </insert>
+
+    <select id="findAll" resultType="Game">
+        select
+        a.GAME_NAME,
+        a.MAX_CNT,
+        a.MIN_CNT,
+        a.GAME_CNT,
+        a.GAME_CNT- nvl(b.cnt,0) as now_cnt
+        from GAME a
+        left outer join
+        (select GAME_NAME,count(*) as cnt from GAMEPLAY where END_TIME is null group by GAME_NAME ) b
+        on a.GAME_NAME=b.GAME_NAME
+        <where>
+            <if test="gameName != null and gameName != ''">
+                and a.GAME_NAME like ('%'|| #{gameName}||'%')
+            </if>
+            <if test="userCnt != null and userCnt != ''">
+                and a.MIN_CNT <![CDATA[<=]]> #{userCnt}
+                and a.MAX_CNT <![CDATA[>=]]> #{userCnt}
+            </if>
+        </where>
+        order by a.GAME_SEQ
+    </select>
+
+    <update id="update">
+        update GAME
+        set MIN_CNT=#{updateParam.minCnt},
+            MAX_CNT=#{updateParam.maxCnt},
+            GAME_CNT=#{updateParam.gameCnt}
+        where GAME_NAME = #{gameName}
+    </update>
+
+    <select id="findById" resultType="Game">
+        select
+            a.GAME_NAME,
+            a.MAX_CNT,
+            a.MIN_CNT,
+            a.GAME_CNT,
+            a.GAME_CNT- nvl(b.cnt,0) as now_cnt
+        from GAME a
+                 left outer join
+                 (select GAME_NAME,count(*) as cnt from GAMEPLAY where END_TIME is null group by GAME_NAME ) b
+                 on a.GAME_NAME=b.GAME_NAME
+        where a.GAME_NAME = #{gameName}
+        order by a.GAME_SEQ
+    </select>
+
+    <delete id="deleteGame">
+        delete from GAME where GAME_NAME = #{gameName}
+    </delete>
+
+    <insert id="playGame">
+        INSERT INTO GAMEPLAY (GAMEPLAY_SEQ, GAME_NAME, START_TIME, END_TIME, USER_ID)
+        VALUES (PK_GAMEPLAY_SEQ.nextval,#{gameName},sysdate,null,#{userId})
+    </insert>
+
+    <select id="playGameCheck" resultType="String">
+        select GAME_NAME
+        from GAMEPLAY
+        where USER_ID= #{userId}
+          and END_TIME is null
+    </select>
+
+    <update id="endTimeUpdate">
+        update GAMEPLAY
+        set END_TIME = sysdate
+        where GAME_NAME = #{gameName}
+        and USER_ID = #{userId}
+    </update>
+
+
+    <update id="endGame">
+        update GAMEPLAY
+        set END_TIME = sysdate
+        where USER_ID = #{userId}
+            and END_TIME is null
+    </update>
+
+</mapper>
