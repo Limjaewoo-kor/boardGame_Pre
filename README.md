@@ -2,10 +2,10 @@
  
  이용하여 보드 게임방의 관리자용 PC의 기능을 상상하여 구현.
 
-![로컬_보드게임](https://github.com/Limjaewoo-kor/boardGame_Pre/assets/68491295/c68aeb24-1907-4fde-9611-5028150a211c)
+![포폴_1](https://github.com/Limjaewoo-kor/boardGame_Pre/assets/68491295/345b4289-1b04-4f34-9912-70303912ecc2)
 
+![포폴_4](https://github.com/Limjaewoo-kor/boardGame_Pre/assets/68491295/e1cd49cc-f4cc-4773-8aef-10e66bf57076)
 
-![로컬_보드게임2](https://github.com/Limjaewoo-kor/boardGame_Pre/assets/68491295/88e9a576-99ea-4262-bf5d-5ac65fb26f48)
+![포폴_2](https://github.com/Limjaewoo-kor/boardGame_Pre/assets/68491295/bbb9d823-db82-47a9-a69e-5b8f10aa0713)
 
-
-![로컬_보드게임3](https://github.com/Limjaewoo-kor/boardGame_Pre/assets/68491295/aafde0ee-0ba5-48af-89ae-603ca1dcacf0)
+![포폴_3](https://github.com/Limjaewoo-kor/boardGame_Pre/assets/68491295/3f506ec2-ad43-4e91-947b-1f78a54f4ae0)
