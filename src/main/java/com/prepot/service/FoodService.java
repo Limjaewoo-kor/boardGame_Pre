@@ -1,6 +1,7 @@
 package com.prepot.service;
 
 import com.prepot.domain.Food;
+import com.prepot.domain.FoodOrder;
 import com.prepot.repository.food.FoodSearchCond;
 import com.prepot.repository.food.FoodUpdateDto;
 
@@ -19,11 +20,11 @@ public interface FoodService {
 
     void deleteFood(String foodName);
 
-    void playFood(String foodName,String userId);
-
-    String playFoodCheck(String foodName, String userId);
-
     void endTimeUpdate(String foodName, String userId);
 
     void endFood(String userId);
+
+    void orderFood(String foodName, String foodPrice, String foodCnt, String userId);
+
+    List<FoodOrder> findFoodOrders(FoodSearchCond foodSearchCond, String userId);
 }

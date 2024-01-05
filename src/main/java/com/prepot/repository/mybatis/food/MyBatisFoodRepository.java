@@ -2,6 +2,7 @@ package com.prepot.repository.mybatis.food;
 
 
 import com.prepot.domain.Food;
+import com.prepot.domain.FoodOrder;
 import com.prepot.domain.Game;
 import com.prepot.repository.food.FoodRepository;
 import com.prepot.repository.food.FoodSearchCond;
@@ -50,16 +51,6 @@ public class MyBatisFoodRepository implements FoodRepository {
     }
 
     @Override
-    public void playFood(String foodName,String userId) {
-        foodMapper.playFood(foodName,userId);
-    }
-
-    @Override
-    public String playFoodCheck(String foodName, String userId) {
-        return foodMapper.playFoodCheck(foodName,userId);
-    }
-
-    @Override
     public void endTimeUpdate(String foodName, String userId) {
         foodMapper.endTimeUpdate(foodName,userId);
     }
@@ -67,6 +58,16 @@ public class MyBatisFoodRepository implements FoodRepository {
     @Override
     public void endFood(String userId) {
         foodMapper.endFood(userId);
+    }
+
+    @Override
+    public void orderFood(String foodName, String foodPrice, String foodCnt, String userId) {
+        foodMapper.orderFood(foodName,foodPrice,foodCnt,userId);
+    }
+
+    @Override
+    public List<FoodOrder> findFoodOrders(FoodSearchCond foodSearchCond, String userId) {
+        return foodMapper.findFoodOrders(foodSearchCond.getFoodName(), String.valueOf(foodSearchCond.getFoodPrice()),userId);
     }
 
 }

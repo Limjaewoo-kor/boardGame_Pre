@@ -3,6 +3,7 @@ package com.prepot.web;
 
 import com.prepot.SessionConst;
 import com.prepot.domain.Food;
+import com.prepot.domain.FoodOrder;
 import com.prepot.domain.Member;
 import com.prepot.repository.food.FoodSearchCond;
 import com.prepot.repository.food.FoodUpdateDto;
@@ -10,6 +11,7 @@ import com.prepot.service.FoodService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.NumberUtils;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
@@ -58,37 +60,35 @@ public class FoodController {
         return "food/food";
     }
 
-    @GetMapping("/start/{foodName}")
-    public String foodStart(@PathVariable String foodName, HttpServletRequest request) {
+    @RequestMapping(value = "/order" , method = RequestMethod.POST)
+    public String foodStart(FoodOrder foodOrder, HttpServletRequest request) {
         HttpSession session = request.getSession();
         Member member = (Member) session.getAttribute(SessionConst.LOGIN_MEMBER);
         String userId = member.getUserId();
 
-        String OldGameName = foodService.playFoodCheck(foodName,userId);
+        String foodName[] = foodOrder.getFoodName().split(",");
+        String[] foodPrice = foodOrder.getFoodPrice().split(",");
+        String[] foodCnt = foodOrder.getFoodCnt().split(",");
 
-        if(null != OldGameName || !OldGameName.equals("") ){
-            if(!OldGameName.equals(foodName)){
-                foodService.endTimeUpdate(OldGameName,userId);
-                foodService.playFood(foodName,userId);
+        for (int i = 0; i < foodName.length; i++) {
+            if(Integer.parseInt(foodCnt[i]) > 0){
+                foodService.orderFood(foodName[i],foodPrice[i],foodCnt[i],userId);
             }
-        }else {
-            foodService.playFood(foodName,userId);
         }
 
-        return "redirect:/foods/user";
+        return "redirect:/";
     }
 
-    @GetMapping("/end")
-    public String foodEnd(HttpServletRequest request) {
+    @GetMapping("/user/order")
+    public String foodOrders(@ModelAttribute("foodSearchCond") FoodSearchCond foodSearchCond, Model model,HttpServletRequest request) {
         HttpSession session = request.getSession();
         Member member = (Member) session.getAttribute(SessionConst.LOGIN_MEMBER);
         String userId = member.getUserId();
 
-        foodService.endFood(userId);
-
-        return "redirect:/foods/user";
+        List<FoodOrder> foodOrders = foodService.findFoodOrders(foodSearchCond,userId);
+        model.addAttribute("foodOrders", foodOrders);
+        return "food/foodOrderListUser";
     }
-
 
 
 

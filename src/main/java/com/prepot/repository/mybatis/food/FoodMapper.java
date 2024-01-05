@@ -1,6 +1,7 @@
 package com.prepot.repository.mybatis.food;
 
 import com.prepot.domain.Food;
+import com.prepot.domain.FoodOrder;
 import com.prepot.domain.Game;
 import com.prepot.repository.food.FoodSearchCond;
 import com.prepot.repository.food.FoodUpdateDto;
@@ -15,7 +16,7 @@ import java.util.Optional;
 @Mapper
 public interface FoodMapper {
 
-    void save(Food member);
+    void save(Food food);
 
     List<Food> findAll(FoodSearchCond foodSearchCond);
 
@@ -25,12 +26,11 @@ public interface FoodMapper {
 
     void deleteFood(String foodName);
 
-    void playFood(@Param("foodName") String foodName,@Param("userId")String userId);
-
-    String playFoodCheck(@Param("foodName") String foodName,@Param("userId")String userId);
-
     void endTimeUpdate(@Param("foodName") String foodName,@Param("userId")String userId);
 
     void endFood(String userId);
 
+    void orderFood(@Param("foodName")String foodName, @Param("foodPrice")String foodPrice, @Param("foodCnt")String foodCnt,@Param("userId") String userId);
+
+    List<FoodOrder> findFoodOrders(@Param("foodName")String foodName, @Param("foodPrice")String foodPrice, @Param("userId")String userId);
 }

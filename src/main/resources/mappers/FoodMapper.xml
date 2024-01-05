@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.prepot.repository.mybatis.food.FoodMapper">
+
+    <insert id="save" >
+        insert into FOOD (FOOD_SEQ, FOOD_NAME, FOOD_PRICE)
+        values (PK_FOOD_SEQ.NEXTVAL,#{foodName}, #{foodPrice})
+    </insert>
+
+
+    <select id="findAll" resultType="Food">
+        select
+        a.FOOD_SEQ,
+        a.FOOD_NAME,
+        a.FOOD_PRICE
+        from FOOD a
+        <where>
+            <if test="foodName != null and foodName != ''">
+                and a.FOOD_NAME like ('%'|| #{foodName}||'%')
+            </if>
+            <if test="foodPrice != null and foodPrice != ''">
+                and a.FOOD_PRICE like ('%'|| #{foodPrice}||'%')
+            </if>
+        </where>
+        order by a.FOOD_SEQ
+    </select>
+
+    <update id="update">
+        update Food
+        set FOOD_PRICE = #{updateParam.foodPrice}
+        where FOOD_NAME = #{foodName}
+    </update>
+
+    <select id="findById" resultType="Food">
+        select
+            a.FOOD_SEQ,
+            a.FOOD_NAME,
+            a.FOOD_PRICE
+        from FOOD a
+        where a.FOOD_NAME = #{foodName}
+        order by a.FOOD_SEQ
+    </select>
+
+    <delete id="deleteFood">
+        delete from FOOD where FOOD_NAME = #{foodName}
+    </delete>
+
+    <insert id="orderFood">
+        INSERT INTO FOOD_ORDER (FOOD_ORDER_SEQ,
+                                FOOD_NAME,
+                                FOOD_PRICE,
+                                FOOD_CNT,
+                                USER_ID,
+                                ORDER_DATE)
+        VALUES (PK_FOOD_ORDER_SEQ.nextval,
+                #{foodName},
+                #{foodPrice},
+                #{foodCnt},
+                #{userId},
+                sysdate)
+    </insert>
+
+    <select id="findFoodOrders" resultType="FoodOrder">
+        select
+        a.FOOD_ORDER_SEQ,
+        a.FOOD_NAME,
+        a.FOOD_PRICE,
+        a.FOOD_CNT
+        from FOOD_ORDER a
+        where 1=1
+            <if test="foodName != null and foodName != '' and foodName != 'null'">
+                and a.FOOD_NAME like ('%'|| #{foodName}||'%')
+            </if>
+            <if test="foodPrice != null and foodPrice != '' and foodPrice != 'null'">
+                and a.FOOD_PRICE like ('%'|| #{foodPrice}||'%')
+            </if>
+        and a.user_ID = #{userId}
+        order by a.FOOD_ORDER_SEQ
+    </select>
+
+</mapper>

@@ -4,8 +4,7 @@
     <title>Hello</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 </head>
-<body style="background-image: url('/img/mainImg.png');  width: 100%; height: auto;
-background-repeat: no-repeat;  background-size : cover; background-position: center;">
+<body>
 
 <div class="container" style="text-align: center;">
     <div th:replace="fragments/bodyHeader :: bodyHeader" />
@@ -32,6 +31,8 @@ background-repeat: no-repeat;  background-size : cover; background-position: cen
         <th:block th:if="${member.userName != 'empty'}">
             <p class="lead" style="-webkit-text-stroke: 1px white;">회원 기능</p> <p>
             <a class="btn btn-lg btn-dark" href="/games/user">게임 목록</a> </p>
+            <a class="btn btn-lg btn-dark" href="/foods/user">음식 주문</a> </p>
+            <a class="btn btn-lg btn-dark" href="/foods/user/order">음식 주문 리스트</a> </p>
         </th:block>
     </div>
     <div th:replace="fragments/footer :: footer" />
