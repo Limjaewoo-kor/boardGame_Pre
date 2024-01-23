@@ -1,6 +1,6 @@
  SpringBoot / Oracle / Thymeleaf / mybatis / interceptor / loginSession / filter를 
  
- 이용하여 보드 게임방의 관리자용 PC의 기능을 상상하여 구현.
+ 이용하여 보드 게임방의 관리자용 PC의 기능을 상상하여 구현. [ 진행중 ]
 
 ![포폴_2024_01](https://github.com/Limjaewoo-kor/boardGame_Pre/assets/68491295/fb1a0258-3f3d-44bc-a0c1-6d7ec6df6234)
 
