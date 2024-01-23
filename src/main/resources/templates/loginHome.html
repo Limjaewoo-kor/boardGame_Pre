@@ -20,6 +20,7 @@
         <br><br><br>
         <th:block th:if="${member.userName != 'empty'}">
             <p class="lead" style="-webkit-text-stroke: 1px white;">관리자 기능</p>
+            <p> <a class="btn btn-lg btn-dark" href="/pays/room">룸비 설정</a></p>
             <p> <a class="btn btn-lg btn-secondary" href="/members/add">회원 가입</a>
                 <a class="btn btn-lg btn-secondary" href="/members">회원 목록</a> </p>
             <p> <a class="btn btn-lg btn-dark" href="/games/add">게임 추가</a>
@@ -33,6 +34,11 @@
             <a class="btn btn-lg btn-dark" href="/games/user">게임 목록</a> </p>
             <a class="btn btn-lg btn-dark" href="/foods/user">음식 주문</a> </p>
             <a class="btn btn-lg btn-dark" href="/foods/user/order">음식 주문 리스트</a> </p>
+        </th:block>
+        <br>
+        <th:block th:if="${member.userName != 'empty'}">
+            <p class="lead" style="-webkit-text-stroke: 1px white;">결제 기능</p> <p>
+            <a class="btn btn-lg btn-dark" href="/pays/user/order">결제 하기</a> </p>
         </th:block>
     </div>
     <div th:replace="fragments/footer :: footer" />

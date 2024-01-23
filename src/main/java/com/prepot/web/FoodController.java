@@ -11,7 +11,6 @@ import com.prepot.service.FoodService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.util.NumberUtils;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
@@ -87,6 +86,7 @@ public class FoodController {
 
         List<FoodOrder> foodOrders = foodService.findFoodOrders(foodSearchCond,userId);
         model.addAttribute("foodOrders", foodOrders);
+        model.addAttribute("userId", userId);
         return "food/foodOrderListUser";
     }
 

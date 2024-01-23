@@ -10,7 +10,7 @@
 
 <div class="container" style="max-width: 600px">
     <div class="py-5 text-center">
-        <h2>음식 목록</h2>
+        <h2>주문 목록</h2>
     </div>
 
     <form th:object="${foodSearchCond}" method="get" class="form-inline">
@@ -42,8 +42,8 @@
         <table class="table">
             <thead>
             <tr>
-                <th>음식명</th>
-                <th>음식 가격</th>
+                <th>주문명</th>
+                <th>주문 가격</th>
                 <th>주문 개수</th>
                 <th>주문한 계정</th>
             </tr>
@@ -58,6 +58,14 @@
             </tr>
             </tbody>
         </table>
+    </div>
+    <hr class="my-4">
+
+    <hr class="my-4">
+    <div>
+        <div>  룸비 : 10000원 </div>
+        <hr class="my-4">
+        총합 : <span th:text="${totalPrice+10000}">2222원</span>
     </div>
     <hr class="my-4">
 </div> <!-- /container -->

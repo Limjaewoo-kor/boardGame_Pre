@@ -8,6 +8,7 @@ public class FoodOrder {
     private String foodName;
     private String foodPrice;
     private String foodCnt;
+    private String userId;
 
 
     public FoodOrder() {

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.prepot.repository.mybatis.pay.PayMapper">
+
+
+
+    <update id="update">
+        update ROOM
+        set ROOM_PRICE = #{updateParam.roomPrice}
+        where ROOM_SEQ = '1'
+    </update>
+
+    <select id="findById" resultType="Pay">
+        select
+            a.ROOM_SEQ,
+            a.ROOM_PRICE
+        from ROOM a
+        where a.ROOM_SEQ = '1'
+    </select>
+
+
+</mapper>

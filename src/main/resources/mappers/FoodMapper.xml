@@ -66,7 +66,8 @@
         a.FOOD_ORDER_SEQ,
         a.FOOD_NAME,
         a.FOOD_PRICE,
-        a.FOOD_CNT
+        a.FOOD_CNT,
+        a.USER_ID
         from FOOD_ORDER a
         where 1=1
             <if test="foodName != null and foodName != '' and foodName != 'null'">
